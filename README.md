@@ -7,3 +7,5 @@ mvn archetype:generate -DgroupId=edu.collegeofsanmateo.cis145 \
 -DarchetypeArtifactId = maven-archetype-webapp \
 -DinteractiveMode = false \
 -Dhttps.protocols=TLSv1.2
+
+mvn jetty:run
