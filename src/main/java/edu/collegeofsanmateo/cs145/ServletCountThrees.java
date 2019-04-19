@@ -45,13 +45,19 @@ public class ServletCountThrees extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		dao = new ReadInt32BitLE();
+		dao = new ReadInt32BitLE(getServletContext().getRealPath("threesData.bin"));
 		try {
+			dao.open();
+			while (!dao.EOF()) {
+				dao.read();
+			}
 			threesCount = dao.getCount();
 		} catch (Exception e) {
 			getServletContext().log("An exception occurred in FileCounter", e);
 			throw new ServletException("An exception occurred in FileCounter"
 					+ e.getMessage());
+		} finally {
+			dao.close();
 		}
 	}
 
